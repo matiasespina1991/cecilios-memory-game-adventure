@@ -2,6 +2,12 @@
   font-weight: 600;
   text-transform: uppercase;
 }
+
+body,
+html {
+  background-color: black;
+  overscroll-behavior-y: none;
+}
 .App {
   position: absolute;
   width: 100%;
@@ -35,6 +41,9 @@
       div {
         padding: 8px;
       }
+      .moves {
+        color: white;
+      }
     }
 
     .restart {
@@ -44,9 +53,7 @@
   }
 
   .container {
-    border: 1px solid #dedede;
     padding: 12px;
-    box-shadow: 0 0 4px 4px #dedede;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -58,5 +65,27 @@
     height: 750px;
     perspective: 100%;
     max-width: 720px;
+  }
+}
+
+.card {
+  border-radius: 0.3rem !important;
+}
+.card img {
+  border-radius: 0.3rem;
+}
+
+.MuiButton-containedPrimary {
+  background-color: #3c4684 !important;
+  border: 1px solid black;
+}
+
+@media (max-width: 1500px) {
+  .App .container {
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 1000px;
+    height: 500px;
+    max-width: 1000px;
   }
 }

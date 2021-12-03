@@ -8,6 +8,7 @@ import {
   DialogTitle
 } from "@material-ui/core";
 import Card from "./card";
+import PreScreen from './prescreen'
 
 
 const uniqueElementsArray = [
@@ -60,6 +61,7 @@ export default function App() {
   const [bestScore, setBestScore] = useState(
     null || Number.POSITIVE_INFINITY
   );
+  const [showBackgroundVideo, setShowBackgroundVideo] = useState(false);
 
   // JSON.parse(localStorage.getItem("bestScore"))
 
@@ -135,15 +137,20 @@ export default function App() {
     setCards(shuffleCards(uniqueElementsArray.concat(uniqueElementsArray)));
   };
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowBackgroundVideo(true)
+    }, 6000);
+  }, [showBackgroundVideo])
+
   return (
     <div className="App">
       <header>
-        <h3>Play the Flip card game</h3>
         <div>
           Select two cards with same content consequtively to make them vanish
         </div>
         <div className="video-container">
-				<iframe src="https://www.youtube.com/embed/6N7VKiDe18M?autoplay=1&mute=1" frameBorder="0"  allowFullScreen></iframe>
+				<iframe className={`${showBackgroundVideo ? "show-background-video" : null}`} src="https://www.youtube.com/embed/6N7VKiDe18M?autoplay=1&mute=1" frameBorder="0"  allowFullScreen></iframe>
 			  </div>	
 
       <style jsx>
@@ -155,13 +162,20 @@ export default function App() {
           min-width: 100vw;
           min-height: 100vh;
           height: 100vh;
+          transition: opacity 1s;
+          opacity:0;
         }
         .video-container * {
           pointer-events: none;
         }
+        
+        .show-background-video{
+          opacity: 1 !important;
+        }
         `}
       </style>
       </header>
+      <PreScreen />
       <div className="container">
         {cards.map((card, index) => {
           return (
@@ -180,7 +194,7 @@ export default function App() {
       <footer>
         <div className="score">
           <div className="moves">
-            <span className="bold">Moves:</span> {moves}
+            <span className="bold">Movimientos:</span> {moves}
           </div>
           {/* {localStorage.getItem("bestScore") && (
             <div className="high-score">
@@ -190,7 +204,7 @@ export default function App() {
         </div>
         <div className="restart">
           <Button onClick={handleRestart} color="primary" variant="contained">
-            Restart
+            Volver a empezar
           </Button>
         </div>
       </footer>
