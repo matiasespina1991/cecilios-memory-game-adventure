@@ -1,16 +1,15 @@
-import React from "react";
 import classnames from "classnames";
 import pokeball from "../public/images/pokeball.png";
 
 
-const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled }) => {
+const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled, randomOrder }) => {
   const handleClick = () => {
     !isFlipped && !isDisabled && onClick(index);
   };
 
-  console.log(card.image.default.src)
   return (
     <div
+      style={randomOrder}
       className={classnames("card", {
         "is-flipped": isFlipped,
         "is-inactive": isInactive

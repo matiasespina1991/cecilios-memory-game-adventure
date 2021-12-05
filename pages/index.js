@@ -38,21 +38,29 @@ const uniqueElementsArray = [
   }
 ];
 
-function shuffleCards(array) {
-  const length = array.length;
-  for (let i = length; i > 0; i--) {
-    const randomIndex = Math.floor(Math.random() * i);
-    const currentIndex = i - 1;
-    const temp = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temp;
-  }
-  return array;
-}
+// function shuffleCards(array) {
+//   const length = array.length;
+//   for (let i = length; i > 0; i--) {
+//     const randomIndex = Math.floor(Math.random() * i);
+//     const currentIndex = i - 1;
+//     const temp = array[currentIndex];
+//     array[currentIndex] = array[randomIndex];
+//     array[randomIndex] = temp;
+//   }
+//   return array;
+// }
+
+// const newArray = shuffleCards(uniqueElementsArray.concat(uniqueElementsArray))
+
+
+
+
 export default function App() {
-  const [cards, setCards] = useState(
-    shuffleCards.bind(null, uniqueElementsArray.concat(uniqueElementsArray))
-  );
+  // const [cards, setCards] = useState(
+  //   shuffleCards.bind(null, uniqueElementsArray.concat(uniqueElementsArray))
+  // );
+  const [cards, setCards] = useState(uniqueElementsArray.concat(uniqueElementsArray));
+  const [randomNumber, setRandomNumber ] = useState(Array.from({length: 40}, () => Math.floor(Math.random() * 40)))
   const [openCards, setOpenCards] = useState([]);
   const [clearedCards, setClearedCards] = useState({});
   const [shouldDisableAllCards, setShouldDisableAllCards] = useState(false);
@@ -62,6 +70,8 @@ export default function App() {
     null || Number.POSITIVE_INFINITY
   );
   const [showBackgroundVideo, setShowBackgroundVideo] = useState(false);
+
+  console.log(randomNumber)
 
   // JSON.parse(localStorage.getItem("bestScore"))
 
@@ -73,6 +83,8 @@ export default function App() {
   const enable = () => {
     setShouldDisableAllCards(false);
   };
+
+
 
   const checkCompletion = () => {
     if (Object.keys(clearedCards).length === uniqueElementsArray.length) {
@@ -133,8 +145,7 @@ export default function App() {
     setShowModal(false);
     setMoves(0);
     setShouldDisableAllCards(false);
-    // set a shuffled deck of cards
-    setCards(shuffleCards(uniqueElementsArray.concat(uniqueElementsArray)));
+    setRandomNumber(Array.from({length: 40}, () => Math.floor(Math.random() * 40)))
   };
 
   useEffect(() => {
@@ -142,6 +153,7 @@ export default function App() {
       setShowBackgroundVideo(true)
     }, 6000);
   }, [showBackgroundVideo])
+
 
   return (
     <div className="App">
@@ -187,6 +199,7 @@ export default function App() {
               isInactive={checkIsInactive(card)}
               isFlipped={checkIsFlipped(index)}
               onClick={handleCardClick}
+              randomOrder={{order: randomNumber[index]}}
             />
           );
         })}
@@ -210,23 +223,28 @@ export default function App() {
       </footer>
       <Dialog
         open={showModal}
-        disableBackdropClick
+        onClose={(event, reason) => {
+          if (reason !== 'backdropClick') {
+              onClose(event, reason)
+          }
+        }}
         disableEscapeKeyDown
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          Hurray!!! You completed the challenge
+          Felicidades canijo!
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You completed the game in {moves} moves. Your best score is{" "}
-            {bestScore} moves.
+            Haz completado el juego en {moves} movimientos.
+            {' '}
+            Desafía a un colega a que te supere.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleRestart} color="primary">
-            Restart
+            Reintentar
           </Button>
         </DialogActions>
       </Dialog>

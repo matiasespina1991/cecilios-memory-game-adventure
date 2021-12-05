@@ -2,7 +2,6 @@ import { useState } from 'react'
 
 export default function PreScreen() {
     const [ preScreenClosed , setPreScreenClosed ] = useState(false)
-    console.log(preScreenClosed)
     return(
         <>
             <div className={`prescreen ${ preScreenClosed ? "prescreen--hide" : ""}`}>
@@ -43,12 +42,12 @@ export default function PreScreen() {
                     text-align: center;
                 }
                 .preescreen__text{
-                    font-size: 1.6rem;
+                    font-size: 1.4rem;
                     font-family: monospace;
                     margin-bottom: 1.5rem;
                 }
                 .empezar{
-                    font-size: 1.3rem;
+                    font-size: 1.2rem;
                     padding: 0.5rem;
                     cursor: pointer;
                 }
