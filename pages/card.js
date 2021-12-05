@@ -6,24 +6,28 @@ const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled, randomO
   const handleClick = () => {
     !isFlipped && !isDisabled && onClick(index);
   };
+  console.log(card)
 
-  return (
-    <div
-      style={randomOrder}
-      className={classnames("card", {
-        "is-flipped": isFlipped,
-        "is-inactive": isInactive
-      })}
-      onClick={handleClick}
-    >
-      <div className="card-face card-font-face">
-        <img src={"/images/pokeball.png"} alt="pokeball" />
+  if(card){
+    return (
+      <div
+        style={randomOrder}
+        className={classnames("card", {
+          "is-flipped": isFlipped,
+          "is-inactive": isInactive
+        })}
+        onClick={handleClick}
+      >
+        <div className="card-face card-font-face">
+          <img src={"/images/pokeball.png"} alt="pokeball" />
+        </div>
+        <div className="card-face card-back-face">
+          <img src={card.image.default.src} alt="pokeball" />
+        </div>
       </div>
-      <div className="card-face card-back-face">
-        <img src={card.image.default.src} alt="pokeball" />
-      </div>
-    </div>
-  );
+    )
+  } else {return null}
+  
 };
 
 export default Card;
