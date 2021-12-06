@@ -6,8 +6,6 @@ const Card = ({ onClick, card, index, isInactive, isFlipped, isDisabled, randomO
   const handleClick = () => {
     !isFlipped && !isDisabled && onClick(index);
   };
-  console.log(card)
-
   if(card){
     return (
       <div

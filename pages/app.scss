@@ -31,7 +31,6 @@ html {
     width: 360px;
     position: relative;
     margin: 0 auto;
-    padding: 10px 4px;
     margin-top: 10px;
 
     .score {
@@ -53,6 +52,7 @@ html {
   }
 
   .container {
+    margin-top: 2rem;
     padding: 12px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -82,6 +82,7 @@ html {
 
 @media (max-width: 1500px) {
   .App .container {
+    margin-top: 2rem;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(2, 1fr);
     width: 1000px;
@@ -92,10 +93,23 @@ html {
 
 @media (max-width: 450px) {
   .App .container {
+    margin-top: 2rem;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, 1fr);
     width: 303px;
     height: 500px;
     max-width: 1000px;
+  }
+  .video-container iframe {
+    display: none;
+  }
+  .App {
+    background-image: url("/images/lauyceci_screen.png");
+    background-position: center;
+    overflow-y: hidden;
+  }
+  .preescreen__inner-container {
+    position: relative;
+    top: -4rem;
   }
 }

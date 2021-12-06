@@ -158,9 +158,6 @@ export default function App() {
   return (
     <div className="App">
       <header>
-        <div>
-          Select two cards with same content consequtively to make them vanish
-        </div>
         <div className="video-container">
 				<iframe className={`${showBackgroundVideo ? "show-background-video" : null}`} src="https://www.youtube.com/embed/6N7VKiDe18M?autoplay=1&mute=1" frameBorder="0"  allowFullScreen></iframe>
 			  </div>	
